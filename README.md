@@ -38,6 +38,9 @@ We evaluate our method on:
 ## Results
 More details and checkpoints will be released soon.
 
+## Contact
+If you have any questions, please open an issue on GitHub.
+
 ## Citation
 If you find this work useful, please cite our paper.
 
