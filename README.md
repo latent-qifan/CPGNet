@@ -8,9 +8,12 @@ This repository contains the official implementation of **CPGNet**, a conditiona
 
 ## Paper
 - arXiv: https://arxiv.org/abs/2603.30008
-  
-## Framework
-![Framework](framework.png)
+
+## Authors
+- Qifan Zhang, Dalian Maritime University, Dalian, China
+- Hao Wang, Dalian Maritime University, Dalian, China
+- Xiangrong Qin, Dalian University of Technology, Dalian, China
+- Ruijie Li, The Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China
 
 ## Highlights
 - Conditional polarization guidance for RGB feature learning
@@ -18,16 +21,17 @@ This repository contains the official implementation of **CPGNet**, a conditiona
 - Edge-guided frequency refinement
 - Designed for polarization-based camouflaged object detection
 
-## Updates
-- [2026.04] Repository initialized
-- [2026.04] Paper released on arXiv
-- [Coming Soon] Training and inference code
+## Framework
+![Framework](framework.png)
 
-## Installation
-Code and environment setup instructions will be released soon.
+## Updates
+- [2026.04] Repository initialized.
+- [2026.04] Paper released on arXiv.
+- [Coming Soon] Training and inference code.
+- [Coming Soon] Pretrained weights and evaluation scripts.
 
 ## Dataset
-We evaluate our method on:
+We evaluate our method on the following datasets:
 - PCOD-1200
 - RGBP-Glass
 - CAMO
@@ -35,19 +39,27 @@ We evaluate our method on:
 - NC4K
 - CHAMELEON
 
-## Results
-More details and checkpoints will be released soon.
+## Installation
+Code and environment setup instructions will be released soon.
 
-## Contact
-If you have any questions, please open an issue on GitHub.
+## Results
+More experimental results, pretrained models, and visualizations will be released soon.
 
 ## Citation
-If you find this work useful, please cite our paper.
+If you find this work useful, please consider citing our paper:
 
 ```bibtex
-@article{cpgnet2026,
+@article{zhang2026cpgnet,
   title={CPGNet: Conditional Polarization Guidance for Camouflaged Object Detection},
-  author={Your Name},
+  author={Zhang, Qifan and Wang, Hao and Qin, Xiangrong and Li, Ruijie},
   journal={arXiv preprint arXiv:2603.30008},
   year={2026}
 }
+
+## Contact
+For any questions about this work, please open an issue on GitHub or contact:
+
+- Qifan Zhang: qifanz77@dlmu.edu.cn
+- Hao Wang: wh_2220233828@dlmu.edu.cn
+- Xiangrong Qin: qxr136@mail.dlut.edu.cn
+- Ruijie Li: rli541@connect.hkust-gz.edu.cn
