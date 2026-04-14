@@ -45,10 +45,10 @@ def main():
     mask_names = sorted([n for n in os.listdir(MASK_ROOT) if n.lower().endswith(VALID_EXTS)])
     pred_names = set([n for n in os.listdir(PRED_ROOT) if n.lower().endswith(VALID_EXTS)])
 
-    # 只做检查，不改变评测逻辑
+
     missing_preds = [n for n in mask_names if n not in pred_names]
     if missing_preds:
-        # 只展示前20个，避免刷屏
+ 
         raise FileNotFoundError(f"Missing pred files (show 20): {missing_preds[:20]} (total={len(missing_preds)})")
 
     for mask_name in tqdm(mask_names, total=len(mask_names)):
@@ -63,7 +63,7 @@ def main():
         if pred is None:
             raise FileNotFoundError(f"Failed to read pred: {pred_path}")
 
-        # 兼容异常 shape（保留你原本行为）
+     
         if pred.ndim != 2:
             pred = pred[:, :, 0]
         if mask.ndim != 2:
@@ -97,7 +97,7 @@ def main():
         sep="",
     )
 
-    # 写到当前目录更稳定（不依赖运行目录层级）
+ 
     out_path = "result.txt"
     with open(out_path, "a+", encoding="utf-8") as f:
         print(
