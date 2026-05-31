@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+*.so
+.DS_Store
+
+# Local environments and logs
+.venv/
+venv/
+runs/
+logs/
+*.log
+
+# Data, checkpoints, and generated outputs
+datasets/
+results/
+ckpt/
+pretrained_pvt/*.pth
+*.pth
+*.pt
+*.ckpt
+*.zip
+
