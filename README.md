@@ -39,7 +39,7 @@ datasets/PCOD/
     gt/
 ```
 
-The repository does not include datasets, pretrained weights, checkpoints, or prediction maps.
+The repository does not include datasets or prediction maps.
 
 ## Pretrained Backbone
 
@@ -63,6 +63,13 @@ python train.py \
 
 ## Testing
 
+Download the trained CPGNet weight and place it at `ckpt/Net_epoch_best.pth`:
+
+```text
+Baidu Netdisk: https://pan.baidu.com/s/13Jf-GBwdYxahpQNdeJ8dkg
+Extraction code: 8wpx
+```
+
 ```bash
 python test.py \
   --pth_path ckpt/Net_epoch_best.pth \
@@ -80,4 +87,3 @@ python evaluation/evaluate.py
 ## Reproducibility
 
 The default training configuration follows the manuscript: input size 704, batch size 4, AdamW optimizer, and 100 training epochs.
-
