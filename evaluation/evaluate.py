@@ -6,10 +6,7 @@ import torch
 import torch.nn.functional as F
 from tqdm import tqdm
 
-try:
-    from evaluation import sod_metrics as M
-except ImportError:
-    import sod_metrics as M
+from py_sod_metrics import MAE, Emeasure, Fmeasure, Smeasure, WeightedFmeasure
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 
@@ -39,11 +36,11 @@ def upsample_like(src, tar_shape):
 
 def main():
     opt = parse_args()
-    fm_metric = M.Fmeasure()
-    wfm_metric = M.WeightedFmeasure()
-    sm_metric = M.Smeasure()
-    em_metric = M.Emeasure()
-    mae_metric = M.MAE()
+    fm_metric = Fmeasure()
+    wfm_metric = WeightedFmeasure()
+    sm_metric = Smeasure()
+    em_metric = Emeasure()
+    mae_metric = MAE()
 
     if not os.path.isdir(opt.mask_root):
         raise FileNotFoundError(f"mask_root not found: {opt.mask_root}")

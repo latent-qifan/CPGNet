@@ -7,3 +7,5 @@ scipy
 timm
 tensorboard
 tqdm
+thop
+py-sod-metrics
