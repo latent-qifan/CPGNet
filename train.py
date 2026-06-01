@@ -172,7 +172,7 @@ if __name__ == "__main__":
 
     # training setup
     parser.add_argument("--epoch", type=int, default=100)
-    parser.add_argument("--lr", type=float, default=6.666e-5)
+    parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--optimizer", type=str, default="AdamW")
     parser.add_argument("--augmentation", action="store_true")
     parser.add_argument("--batchsize", type=int, default=4)
@@ -188,16 +188,6 @@ if __name__ == "__main__":
 
     # data format
     parser.add_argument("--pol_as_gray", action="store_true", help="aop/dop load as grayscale (L)")
-
-    # lr scheduler for 100 epochs
-    parser.add_argument("--lr_decay_factor", type=float, default=0.5, help="new_lr = old_lr * factor")
-    parser.add_argument(
-        "--lr_decay_patience",
-        type=int,
-        default=4,
-        help="epochs with no val improvement before reducing lr",
-    )
-    parser.add_argument("--min_lr", type=float, default=1e-6, help="minimum learning rate")
 
     opt = parser.parse_args()
     os.makedirs(opt.save_path, exist_ok=True)
@@ -227,17 +217,6 @@ if __name__ == "__main__":
     else:
         optimizer = torch.optim.SGD(params, lr=opt.lr, weight_decay=1e-4, momentum=0.9)
 
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer,
-        mode="min",
-        factor=opt.lr_decay_factor,
-        patience=opt.lr_decay_patience,
-        threshold=1e-4,
-        threshold_mode="rel",
-        cooldown=0,
-        min_lr=opt.min_lr,
-    )
-
     image_root = os.path.join(opt.train_path, "rgb/")
     aop_root = os.path.join(opt.train_path, "train-aop/")
     dop_root = os.path.join(opt.train_path, "train-dop/")
@@ -261,25 +240,17 @@ if __name__ == "__main__":
     print("#" * 20, "Start Training", "#" * 20)
     best_mae = 1.0
     best_epoch = 0
-    prev_lr = optimizer.param_groups[0]["lr"]
 
     for epoch in range(1, opt.epoch + 1):
         train(train_loader, model, optimizer, epoch, opt)
 
         if epoch % opt.epoch_save == 0:
-            mae = val(model, epoch, opt.save_path, writer, opt)
-            scheduler.step(mae)
+            val(model, epoch, opt.save_path, writer, opt)
 
         current_lr = optimizer.param_groups[0]["lr"]
         writer.add_scalar("LR", current_lr, global_step=epoch)
 
         print(f"Current LR: {current_lr:.8e}")
         logging.info(f"Current LR: {current_lr:.8e}")
-
-        if current_lr < prev_lr:
-            print(f"LR reduced from {prev_lr:.8e} to {current_lr:.8e}")
-            logging.info(f"LR reduced from {prev_lr:.8e} to {current_lr:.8e}")
-
-        prev_lr = current_lr
 
     writer.close()
